@@ -1,0 +1,10 @@
+var mapFun = function(){emit(this.ord_date, this.price);}
+
+var redFun = function(key,value){ return Array.avg(value);}
+
+db.orders.mapReduce(
+		mapFun , 
+		redFun ,
+		{  
+		   query:  { ord_date: { $gt: ISODate("2020-03-01")}},
+		   out: "map-red-output" })
